@@ -8,6 +8,7 @@ import { loadEnv } from './config/env';
 import bloodStockRouter from './modules/bloodStock/bloodStock.route';
 import { AppError } from './common/error/appError';
 import { ERROR_CODE, HTTP_CODE } from './common/error/httpCode';
+import donorRouter from './modules/donor/donor.route';
 
 const env = loadEnv();
 
@@ -26,11 +27,10 @@ app.use(
 // route
 app.use('/api/v1/auth', auhtRouter);
 app.use('/api/v1/blood-stocks', bloodStockRouter);
-// app.use('/api/users', userRoute);
-// app.use('/api/branchs', branchRoute);
+app.use('/api/v1/donors', donorRouter);
 
 // not found error
-app.use((req, res, next) => {
+app.use((_req, _res, next) => {
   next(
     new AppError(
       'Route not found',
