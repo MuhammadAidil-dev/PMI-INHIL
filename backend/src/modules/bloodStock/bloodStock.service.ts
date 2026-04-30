@@ -185,7 +185,7 @@ class BloodStockService {
       throw new AppError(
         `Stok ${bloodType}${rhesus} tidak mencukupi. Tersedia: ${current.totalBags} kantong`,
         HTTP_CODE.BAD_REQUEST,
-        ERROR_CODE.INTERNAL_SERVER,
+        ERROR_CODE.BAD_REQUEST,
       );
     }
 

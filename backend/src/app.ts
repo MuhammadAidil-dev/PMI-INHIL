@@ -9,6 +9,7 @@ import bloodStockRouter from './modules/bloodStock/bloodStock.route';
 import { AppError } from './common/error/appError';
 import { ERROR_CODE, HTTP_CODE } from './common/error/httpCode';
 import donorRouter from './modules/donor/donor.route';
+import transactionRouter from './modules/transactions/transaction.route';
 
 const env = loadEnv();
 
@@ -28,6 +29,7 @@ app.use(
 app.use('/api/v1/auth', auhtRouter);
 app.use('/api/v1/blood-stocks', bloodStockRouter);
 app.use('/api/v1/donors', donorRouter);
+app.use('/api/v1/transactions', transactionRouter);
 
 // not found error
 app.use((_req, _res, next) => {
