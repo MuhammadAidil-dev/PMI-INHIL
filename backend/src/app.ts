@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import cookieParser from 'cookie-parser';
-
+import path from 'path';
 import cors from 'cors';
 import { errorMiddleware } from './middleware/errorMiddleware';
 import auhtRouter from './modules/auth/auth.route';
@@ -29,6 +29,7 @@ app.use(
     credentials: true,
   }),
 );
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // route
 app.use('/api/v1/auth', auhtRouter);

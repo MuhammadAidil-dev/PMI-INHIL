@@ -62,4 +62,4 @@ docker-data/
 # ===============================
 # Image
 # ===============================
-public/uploads/news
+uploads/news
