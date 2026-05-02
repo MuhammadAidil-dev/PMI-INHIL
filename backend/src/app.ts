@@ -15,6 +15,7 @@ import {
   schedulePublicRouter,
 } from './modules/schedule/schedule.route';
 import newsRouter from './modules/news/news.route';
+import notificationRouter from './modules/notifications/notification.route';
 
 const env = loadEnv();
 
@@ -39,6 +40,7 @@ app.use('/api/v1/transactions', transactionRouter);
 app.use('/api/v1/admin/schedules', scheduleAdminRouter);
 app.use('/api/v1/public/schedules', schedulePublicRouter);
 app.use('/api/v1/news', newsRouter);
+app.use('/api/v1/notifications', notificationRouter);
 
 // not found error
 app.use((_req, _res, next) => {

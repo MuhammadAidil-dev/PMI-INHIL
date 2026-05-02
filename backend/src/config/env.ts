@@ -28,6 +28,8 @@ export const loadEnv = () => {
     SECRET_KEY_REFRESH_TOKEN: getEnv('SECRET_KEY_REFRESH_TOKEN'),
     JWT_EXPIRES_IN: getEnv('JWT_EXPIRES_IN'),
     CLIENT_URL: getEnv('CLIENT_URL'),
+    FONNTE_TOKEN: getEnv('FONNTE_TOKEN'),
+    FONNTE_API_URL: getEnv('FONNTE_API_URL'),
   };
 };
 
