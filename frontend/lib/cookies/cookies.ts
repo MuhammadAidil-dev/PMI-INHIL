@@ -6,7 +6,7 @@ import Cookies from 'js-cookie';
 
 /** Nama-nama cookie yang dipakai di seluruh aplikasi */
 export const COOKIE_KEYS = {
-  AUTH_TOKEN: 'auth_token',
+  AUTH_TOKEN: process.env.NEXT_PUBLIC_COOKIE_KEY || 'auth_token',
 } as const;
 
 /** Opsi default cookie — sesuaikan domain/secure di production */
