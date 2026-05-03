@@ -14,11 +14,6 @@ export interface LoginPayload {
   password: string;
 }
 
-export interface LoginResponse {
-  token: string;
-  admin: Admin;
-}
-
 /**
  * Format return value Server Action.
  *
@@ -35,3 +30,14 @@ export type ActionResult<T = void> =
       /** Field-level validation errors untuk ditampilkan di form */
       validationErrors?: Record<string, string>;
     };
+
+export type LoginResponse = {
+  token: string;
+  admin: {
+    id: string;
+    username: string;
+    email: string;
+    role: string;
+    lastLogin: Date;
+  };
+};

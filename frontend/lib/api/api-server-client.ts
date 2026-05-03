@@ -79,9 +79,10 @@ const safeServerRequest = async <T>(
     const response = await fetch(fullUrl, {
       ...init,
       headers,
-      // Default: no-store agar Server Action tidak pakai stale cache
+
       cache: config?.cache ?? 'no-store',
       next: config?.next,
+      credentials: 'include',
     });
 
     // Parse body — backend selalu return JSON

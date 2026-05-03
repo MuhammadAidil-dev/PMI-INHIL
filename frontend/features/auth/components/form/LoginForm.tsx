@@ -1,13 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState, useTransition } from 'react';
 import InputContainer from '@/components/input/Input';
 import Button from '@/components/button/Button';
 import { ShieldPlus } from 'lucide-react';
+import { loginAction } from '../../action/auth.action';
+import { ToastError } from '@/lib/toast/ToastNotification';
+import { ActionResult, LoginResponse } from '../../type/auth.type';
+
+// Tipe error yang mungkin dikembalikan loginAction
+type FormError = Extract<ActionResult<LoginResponse>, { success: false }>;
 
 export const LoginForm = () => {
   const [identifier, setIdentifier] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
+  const [formError, setFormError] = useState<FormError | null>(null);
+
+  const handleLogin = (e: FormEvent) => {
+    e.preventDefault();
+
+    startTransition(async () => {
+      const result = await loginAction({ identifier, password });
+
+      if (!result.success && !result.validationErrors) {
+        console.log(result);
+        ToastError(result.message);
+      }
+
+      if (!result.success && result.validationErrors) {
+        setFormError(result);
+      }
+    });
+  };
+
+  // helper field error
+  const fieldError = (field: string) => formError?.validationErrors?.[field];
 
   return (
     <div className="w-full p-8 md:p-12 flex flex-col justify-center">
@@ -25,25 +53,28 @@ export const LoginForm = () => {
 
       {/* Heading */}
       <div className="mb-8">
-        <h2 className="text-[24px] leading-8 font-semibold text-[#131b2e]">
+        <h2 className="text-[24px] leading-8 font-semibold text-neutral">
           Masuk ke Panel
         </h2>
-        <p className="text-[14px] leading-5 text-[#5c5f61] mt-1">
+        <p className="text-[14px] leading-5 text-tertiary mt-1">
           Silakan masukkan kredensial petugas Anda
         </p>
       </div>
 
       {/* Form */}
-      <form className="w-full flex flex-col gap-4">
-        {/* Identifier Field */}
+      <form onSubmit={handleLogin} className="w-full flex flex-col gap-4">
         <InputContainer
           label="Email atau Username"
           type="text"
-          name="Identifier"
+          name="identifier"
           required={true}
           placeHolder="pmi12345"
           value={identifier}
           setValue={setIdentifier}
+          isError={{
+            error: !!fieldError('identifier'),
+            message: fieldError('identifier') ?? '',
+          }}
         />
 
         <InputContainer
@@ -54,10 +85,18 @@ export const LoginForm = () => {
           placeHolder="*******"
           value={password}
           setValue={setPassword}
+          isError={{
+            error: !!fieldError('password'),
+            message: fieldError('password') ?? '',
+          }}
         />
 
         <div className="mt-4">
-          <Button text="Masuk" type="submit" />
+          <Button
+            text={isPending ? 'Memproses...' : 'Masuk'}
+            type="submit"
+            disabled={isPending}
+          />
         </div>
       </form>
     </div>

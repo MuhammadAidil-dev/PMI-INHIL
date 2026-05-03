@@ -4,7 +4,8 @@
 // ============================================================
 
 import { apiClient, ApiResult } from '@/lib/api/api-client';
-import { Admin } from '../type/auth.type';
+import { Admin, LoginPayload, LoginResponse } from '../type/auth.type';
+import { apiServerClient } from '@/lib/api/api-server-client';
 
 export const authService = {
   /**
@@ -15,4 +16,10 @@ export const authService = {
    * const { data, error } = await authService.getMe();
    */
   getMe: (): Promise<ApiResult<Admin>> => apiClient.get<Admin>('/auth/me'),
+
+  loginService: async (
+    payload: LoginPayload,
+  ): Promise<ApiResult<LoginResponse>> => {
+    return apiServerClient.post('/api/v1/auth/login', payload);
+  },
 };
