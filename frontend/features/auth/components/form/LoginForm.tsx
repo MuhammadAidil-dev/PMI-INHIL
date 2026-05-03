@@ -1,130 +1,65 @@
 'use client';
 
-import { useTransition, useState } from 'react';
-import { ActionResult } from '../../type/auth.type';
-import { loginAction } from '../../action/auth.action';
-import { FieldError } from '@/components/ui/FieldError';
+import { useState } from 'react';
+import InputContainer from '@/components/input/Input';
+import Button from '@/components/button/Button';
+import { ShieldPlus } from 'lucide-react';
 
-// ============================================================
-// LoginForm: Form login yang memanggil Server Action
-//
-// Pola yang dipakai: useTransition + Server Action
-// ─────────────────────────────────────────────────────────
-// - `isPending` dari useTransition → loading state otomatis
-// - Error validasi per-field ditampilkan via FieldError
-// - Error umum (network, 500) ditampilkan di atas tombol
-// ============================================================
-
-export function LoginForm() {
-  const [isPending, startTransition] = useTransition();
-  const [actionError, setActionError] = useState<Extract<
-    ActionResult,
-    { success: false }
-  > | null>(null);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log('dipanggil');
-    setActionError(null);
-
-    const formData = new FormData(e.currentTarget);
-    const payload = {
-      identifier: formData.get('username') as string,
-      password: formData.get('password') as string,
-    };
-
-    startTransition(async () => {
-      const result = await loginAction(payload);
-
-      console.log('result: ', result);
-      // Jika success: loginAction sudah redirect() ke /dashboard
-      // Kode di bawah hanya jalan jika result.success === false
-      if (!result.success) {
-        setActionError(result);
-      }
-    });
-  };
-
-  const fieldErr = actionError?.validationErrors;
-  // Error umum: bukan validasi form (misal 500, network error)
-  const generalError =
-    actionError && !actionError.validationErrors ? actionError.message : null;
+export const LoginForm = () => {
+  const [identifier, setIdentifier] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5">
-      {/* Error umum (non-validasi) */}
-      {generalError && (
-        <div
-          role="alert"
-          className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-        >
-          {generalError}
+    <div className="w-full p-8 md:p-12 flex flex-col justify-center">
+      {/* Logo & App Name */}
+      <div className="flex items-center gap-3 mb-10">
+        <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shrink-0">
+          <span className="text-white">
+            <ShieldPlus />
+          </span>
         </div>
-      )}
+        <h1 className="text-[24px] leading-8 font-semibold text-primary tracking-tight">
+          PMI Resource Manager
+        </h1>
+      </div>
 
-      {/* Field: Username */}
-      <div className="space-y-1 text-black">
-        <label
-          htmlFor="username"
-          className="block text-sm font-medium text-black"
-        >
-          Username
-        </label>
-        <input
-          id="username"
-          name="username"
+      {/* Heading */}
+      <div className="mb-8">
+        <h2 className="text-[24px] leading-8 font-semibold text-[#131b2e]">
+          Masuk ke Panel
+        </h2>
+        <p className="text-[14px] leading-5 text-[#5c5f61] mt-1">
+          Silakan masukkan kredensial petugas Anda
+        </p>
+      </div>
+
+      {/* Form */}
+      <form className="w-full flex flex-col gap-4">
+        {/* Identifier Field */}
+        <InputContainer
+          label="Email atau Username"
           type="text"
-          autoComplete="username"
-          disabled={isPending}
-          aria-describedby={fieldErr?.username ? 'username-error' : undefined}
-          className={`
-            w-full rounded-md border px-3 py-2 text-sm outline-none
-            transition-colors focus:ring-2 focus:ring-red-500 focus:border-red-500
-            disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400
-            ${fieldErr?.username ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-white'}
-          `}
+          name="Identifier"
+          required={true}
+          placeHolder="pmi12345"
+          value={identifier}
+          setValue={setIdentifier}
         />
-        <FieldError message={fieldErr?.username} />
-      </div>
 
-      {/* Field: Password */}
-      <div className="space-y-1 text-black">
-        <label
-          htmlFor="password"
-          className="block text-sm font-medium text-black"
-        >
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
+        <InputContainer
+          label="Password"
           type="password"
-          autoComplete="current-password"
-          disabled={isPending}
-          aria-describedby={fieldErr?.password ? 'password-error' : undefined}
-          className={`
-            w-full rounded-md border px-3 py-2 text-sm outline-none
-            transition-colors focus:ring-2 focus:ring-red-500 focus:border-red-500
-            disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-400
-            ${fieldErr?.password ? 'border-red-400 bg-red-50' : 'border-gray-300 bg-white'}
-          `}
+          name="password"
+          required={true}
+          placeHolder="*******"
+          value={password}
+          setValue={setPassword}
         />
-        <FieldError message={fieldErr?.password} />
-      </div>
 
-      {/* Submit */}
-      <button
-        type="submit"
-        disabled={isPending}
-        className="
-          w-full rounded-md bg-red-600 px-4 py-2.5 text-sm font-semibold
-          text-white transition-colors hover:bg-red-700 active:bg-red-800
-          disabled:cursor-not-allowed disabled:bg-red-400
-          focus-visible:outline focus-visible:outline-red-600
-        "
-      >
-        {isPending ? 'Memproses...' : 'Masuk'}
-      </button>
-    </form>
+        <div className="mt-4">
+          <Button text="Masuk" type="submit" />
+        </div>
+      </form>
+    </div>
   );
-}
+};
