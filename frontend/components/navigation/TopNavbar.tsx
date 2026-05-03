@@ -19,9 +19,9 @@ export default function TopNavBar() {
     <header className="flex items-center justify-between px-6 py-3 w-full sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="flex items-center gap-8">
         <span className="text-xl font-bold tracking-tight text-rose-600">
-          PMI Resource Manager
+          PMI INHIL
         </span>
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+        <nav className="ml-28 hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (
