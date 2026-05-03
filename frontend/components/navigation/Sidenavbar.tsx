@@ -47,7 +47,7 @@ export default function SideNavBar() {
       {/* Navigation */}
       <nav className="mt-4 grow px-3 space-y-1">
         {navItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = pathname.includes(item.href);
           return (
             <Link
               key={item.href}

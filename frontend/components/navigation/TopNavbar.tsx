@@ -23,7 +23,7 @@ export default function TopNavBar() {
         </span>
         <nav className="ml-28 hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = pathname.includes(link.href);
             return (
               <Link
                 key={link.href}
