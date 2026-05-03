@@ -6,7 +6,6 @@ import {
   LayoutDashboard,
   Droplets,
   Users,
-  Truck,
   Megaphone,
   Plus,
   HelpCircle,
@@ -24,7 +23,6 @@ const navItems: NavItem[] = [
   { href: '/dashboard', icon: LayoutDashboard, label: 'Stock Summary' },
   { href: '/inventory', icon: Droplets, label: 'Blood Inventory' },
   { href: '/donors', icon: Users, label: 'Donor Database' },
-  { href: '/mobile-units', icon: Truck, label: 'Mobile Units' },
   { href: '/broadcast', icon: Megaphone, label: 'Broadcast CMS' },
 ];
 
