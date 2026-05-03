@@ -1,0 +1,58 @@
+import { Donor } from '../components/ui/DonorTableRow';
+
+export const MOCK_DONORS: Donor[] = [
+  {
+    id: '1',
+    name: 'Aditya Wijaya',
+    donorId: '88201-928',
+    bloodType: 'O+',
+    lastDonation: '12 Okt 2023',
+    location: 'PMI Tembilahan',
+    status: 'eligible',
+  },
+  {
+    id: '2',
+    name: 'Siti Lestari',
+    donorId: '88201-441',
+    bloodType: 'AB-',
+    lastDonation: '14 Jan 2024',
+    location: 'Mobile Unit Inhil',
+    status: 'resting',
+  },
+  {
+    id: '3',
+    name: 'Bambang Permadi',
+    donorId: '88201-102',
+    bloodType: 'B+',
+    lastDonation: '05 Nov 2023',
+    location: 'PMI Tembilahan',
+    status: 'eligible',
+  },
+  {
+    id: '4',
+    name: 'Rina Kusuma',
+    donorId: '88201-009',
+    bloodType: 'A+',
+    lastDonation: '22 Agu 2023',
+    location: 'PMI Tembilahan',
+    status: 'inactive',
+  },
+  {
+    id: '5',
+    name: 'Muhammad Fauzi',
+    donorId: '88201-331',
+    bloodType: 'O-',
+    lastDonation: '30 Des 2023',
+    location: 'Mobile Unit Inhil',
+    status: 'eligible',
+  },
+  {
+    id: '6',
+    name: 'Dewi Anggraini',
+    donorId: '88201-558',
+    bloodType: 'A-',
+    lastDonation: '18 Feb 2024',
+    location: 'PMI Tembilahan',
+    status: 'resting',
+  },
+];
