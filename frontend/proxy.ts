@@ -15,21 +15,21 @@ const isPublicPath = (pathname: string): boolean =>
   PUBLIC_PATHS.some((path) => pathname.startsWith(path));
 
 export function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-  const token = request.cookies.get(COOKIE_KEYS.AUTH_TOKEN)?.value;
+  // const { pathname } = request.nextUrl;
+  // const token = request.cookies.get(COOKIE_KEYS.AUTH_TOKEN)?.value;
 
-  // // Sudah login, coba akses /login → redirect ke dashboard
-  if (token && isPublicPath(pathname)) {
-    return NextResponse.redirect(new URL('/dashboard', request.url));
-  }
+  // // // Sudah login, coba akses /login → redirect ke dashboard
+  // if (token && isPublicPath(pathname)) {
+  //   return NextResponse.redirect(new URL('/dashboard', request.url));
+  // }
 
-  // // Belum login, coba akses route protected → redirect ke login
-  if (!token && !isPublicPath(pathname)) {
-    const loginUrl = new URL('/auth/login', request.url);
-    // Simpan URL tujuan asal untuk redirect setelah login (opsional)
-    loginUrl.searchParams.set('callbackUrl', pathname);
-    return NextResponse.redirect(loginUrl);
-  }
+  // // // Belum login, coba akses route protected → redirect ke login
+  // if (!token && !isPublicPath(pathname)) {
+  //   const loginUrl = new URL('/auth/login', request.url);
+  //   // Simpan URL tujuan asal untuk redirect setelah login (opsional)
+  //   loginUrl.searchParams.set('callbackUrl', pathname);
+  //   return NextResponse.redirect(loginUrl);
+  // }
 
   return NextResponse.next();
 }

@@ -5,6 +5,9 @@
   --foreground: #171717;
   --primary: #dd2d4a;
   --hover: #a51b32;
+  --secondary: #f8fafc;
+  --tertiary: #64748b;
+  --neutral: #0f172a;
 }
 
 @theme {
@@ -12,6 +15,9 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-hover: var(--hover);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-neutral: var(--neutral);
   --font-montserrat: var(--font-montserrat);
 }
 
