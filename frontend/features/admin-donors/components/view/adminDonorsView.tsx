@@ -8,6 +8,7 @@ import { DonorFilterBar } from '../ui/Donorfilterbar';
 import { DonorTable } from '../ui/DonorTable';
 import { MOCK_DONORS } from '../../constants/donors.data';
 import { Donor } from '../ui/DonorTableRow';
+import Link from 'next/link';
 
 export default function AdminDonorView() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,10 +57,13 @@ export default function AdminDonorView() {
             <FileDown size={16} />
             Export CSV
           </button>
-          <button className="bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-hover transition-colors shadow-sm">
+          <Link
+            href={'/donors/register'}
+            className="bg-primary text-white px-4 py-2 rounded-lg font-semibold text-sm flex items-center gap-2 hover:bg-hover transition-colors shadow-sm"
+          >
             <UserPlus size={16} />
             Daftarkan Pendonor
-          </button>
+          </Link>
         </div>
       </div>
 
