@@ -9,7 +9,7 @@ import { COOKIE_KEYS } from './lib/cookies/cookies';
 // apakah cookie ada atau tidak (fast check, tidak fetch ke API).
 // ============================================================
 
-const PUBLIC_PATHS = ['/auth/login'];
+const PUBLIC_PATHS = ['/auth/login', '/'];
 
 const isPublicPath = (pathname: string): boolean =>
   PUBLIC_PATHS.some((path) => pathname.startsWith(path));
@@ -18,12 +18,12 @@ export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const token = request.cookies.get(COOKIE_KEYS.AUTH_TOKEN)?.value;
 
-  // Sudah login, coba akses /login → redirect ke dashboard
+  // // Sudah login, coba akses /login → redirect ke dashboard
   if (token && isPublicPath(pathname)) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  // Belum login, coba akses route protected → redirect ke login
+  // // Belum login, coba akses route protected → redirect ke login
   if (!token && !isPublicPath(pathname)) {
     const loginUrl = new URL('/auth/login', request.url);
     // Simpan URL tujuan asal untuk redirect setelah login (opsional)
