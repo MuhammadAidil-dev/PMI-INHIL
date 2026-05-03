@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { BloodStock } from '../../types/admin-inventory.type';
 import { BloodTypeAvatar } from './BloodtypeAvatar';
 import { StatusBadge } from './StatusBadge';
@@ -89,12 +90,13 @@ export function InventoryTable({ stocks, onUpdateStock }: InventoryTableProps) {
 
                 {/* Actions */}
                 <td className="px-6 py-5 text-right">
-                  <button
+                  <Link
+                    href={'/inventory/update'}
                     onClick={() => onUpdateStock?.(stock)}
                     className="text-rose-600 text-sm font-medium hover:underline underline-offset-4 decoration-2 transition-all"
                   >
                     Update Stock
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))
