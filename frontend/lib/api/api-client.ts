@@ -19,12 +19,13 @@ import { parseError } from '../errors/parse-error';
  */
 const createAxiosInstance = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000/api',
+    baseURL: process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:5000',
     timeout: 15_000,
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
     },
+    withCredentials: true,
   });
 
   // ── Request Interceptor ────────────────────────────────────

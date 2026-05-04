@@ -1,6 +1,6 @@
 'use client';
 
-import { BloodGroup, RhesusType } from '../types/inventory.types';
+import { BloodGroup, RhesusType } from '../../types/admin-inventory.type';
 
 const BLOOD_GROUPS: BloodGroup[] = ['A', 'B', 'AB', 'O'];
 

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export type DonationEvent = {
   id: string;
-  month: string;
+  month: string | number;
   day: number;
   title: string;
   time: string;
@@ -21,7 +21,10 @@ export default function UpcomingEvents({ events }: UpcomingEventsProps) {
 
       <div className="px-6 space-y-6 grow">
         {events.map((event) => (
-          <div key={event.id} className="flex items-center gap-4">
+          <div
+            key={event.id}
+            className="flex items-center gap-4 border-b border-foreground pb-2"
+          >
             <div className="text-center min-w-8">
               <p className="text-[10px] font-bold text-gray-400 uppercase">
                 {event.month}

@@ -2,22 +2,16 @@ export type DonorRecord = {
   id: string;
   name: string;
   bloodType: string;
-  status: 'Verified' | 'Pending' | 'Rejected';
+  total: number;
 };
 
 type RecentRecordsProps = {
   records: DonorRecord[];
 };
 
-const statusStyles: Record<DonorRecord['status'], string> = {
-  Verified: 'text-emerald-500',
-  Pending: 'text-amber-500',
-  Rejected: 'text-rose-500',
-};
-
 export default function RecentRecords({ records }: RecentRecordsProps) {
   return (
-    <div className="bg-white rounded-xl border border-gray-100 shadow-sm">
+    <div className="lg:col-span-8 bg-white rounded-xl border border-gray-100 shadow-sm flex flex-col">
       <div className="px-6 py-5">
         <h3 className="font-semibold text-gray-900">Recent Records</h3>
       </div>
@@ -33,7 +27,7 @@ export default function RecentRecords({ records }: RecentRecordsProps) {
                 Type
               </th>
               <th className="px-6 py-3 text-[10px] font-bold text-gray-400 uppercase tracking-widest text-right">
-                Status
+                Total Donasi
               </th>
             </tr>
           </thead>
@@ -51,11 +45,9 @@ export default function RecentRecords({ records }: RecentRecordsProps) {
                     {record.bloodType}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-right">
-                  <span
-                    className={`text-[10px] font-bold uppercase ${statusStyles[record.status]}`}
-                  >
-                    {record.status}
+                <td className="px-6 py-4 text-center ">
+                  <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-2 py-0.5 rounded">
+                    {record.total}
                   </span>
                 </td>
               </tr>
