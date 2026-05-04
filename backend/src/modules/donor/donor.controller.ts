@@ -45,6 +45,20 @@ export const donorController = {
   },
 
   /**
+   * GET /donors/recent
+   * List pendonor 7 hari terakhir
+   */
+  getDonorsRecent: async (req: Request, res: Response<GetAllDonor>) => {
+    const result = await donorService.getDonorsRecent();
+
+    return res.status(HTTP_CODE.OK).json({
+      success: true,
+      message: 'Data pendonor berhasil diambil',
+      data: result,
+    });
+  },
+
+  /**
    * GET /donors/stats
    * Statistik pendonor untuk dashboard
    */

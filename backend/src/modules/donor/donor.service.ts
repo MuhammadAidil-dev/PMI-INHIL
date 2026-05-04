@@ -82,6 +82,12 @@ export const donorService = {
     };
   },
 
+  async getDonorsRecent(): Promise<DonorResponse[]> {
+    const donorRecent = await donorRepository.findDonorsHistory();
+
+    return donorRecent.map(formatDonor);
+  },
+
   async getById(id: string): Promise<DonorResponse> {
     const donor = await donorRepository.findById(id);
     if (!donor || !donor.isActive) {

@@ -21,6 +21,8 @@ donorRouter.get(
   asyncHandler(donorController.getAll),
 );
 
+donorRouter.get('/recents', asyncHandler(donorController.getDonorsRecent));
+
 donorRouter.post(
   '/',
   validate(createDonorSchema),

@@ -63,6 +63,21 @@ export const donorRepository = {
   },
 
   /**
+   * Ambil semua donor terbaru > 7 hari terakhir
+   */
+  async findDonorsHistory(): Promise<IDonor[]> {
+    const sevenDaysAgo = new Date();
+    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+    return DonorModel.find({
+      isActive: true,
+      lastDonationDate: {
+        $gte: sevenDaysAgo,
+      },
+    });
+  },
+
+  /**
    * Ambil semua pendonor yang sudah eligible dan belum dinotifikasi
    * dalam 30 hari terakhir. Dipakai oleh service notifikasi WA.
    */
